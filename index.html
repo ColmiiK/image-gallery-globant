@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Gallery</title>
+    <link href="css/style.css" rel="stylesheet" /></head
+  ><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <div class="header">
+    <a href="#home" class="active" id="image-gallery">Image Gallery</a>
+    <div id="links">
+      <a href="#Login">Login</a>
+    </div>
+    <a href="javascript:void(0);" class="icon" onclick="hamburger()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  <body>
+    <div class="saved-header">
+      <div class="saved-info">
+        <h2>Saved</h2>
+        <p class="image-count">0 images</p>
+      </div>
+      <button id="toggle-saved" class="bookmark-button">
+        <img
+          src="bookmark-icon.svg"
+          alt="Bookmark Icon"
+          class="bookmark-icon"
+        />
+      </button>
+    </div>
+    <div class="saved-images-container" style="display: none">
+      <div class="saved-images"></div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="query" placeholder="Search" />
+    </div>
+
+    <div class="image-container"></div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
