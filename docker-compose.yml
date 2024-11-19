@@ -1,0 +1,21 @@
+version: "3"
+services:
+  image-back:
+    build:
+      context: app/back/
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      UNSPLASH_API_KEY: ${UNSPLASH_API_KEY}
+    container_name: image-back
+    ports:
+      - "5000:5000"
+    restart: always
+  image-front:
+    build:
+      context: app/front/
+      dockerfile: Dockerfile
+    container_name: image-front
+    ports:
+      - "8080:80"
+    restart: always

@@ -45,6 +45,7 @@ function addImages(imageUrls) {
     const imageElement = document.createElement("img");
     imageElement.src = url;
     imageElement.className = "image";
+    imageElement.loading = "lazy";
     imageElement.addEventListener("click", () => {
       saveImage(url);
     });
@@ -81,13 +82,23 @@ async function loadRandomImage() {
   }
 }
 
+function handleScroll() {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (scrollTop + clientHeight >= scrollHeight - 100) loadRandomImage();
+}
+
 queryInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") loadImage();
 });
-
 toggleSavedButton.addEventListener("click", () => {
   const isVisible = savedImagesContainer.style.display === "block";
   savedImagesContainer.style.display = isVisible ? "none" : "block";
 });
 
-window.onload = loadRandomImage;
+let isScrolling;
+window.addEventListener("scroll", () => {
+  clearTimeout(isScrolling);
+  isScrolling = setTimeout(handleScroll, 200);
+});
+
+for (let i = 0; i < 4; i++) loadRandomImage();

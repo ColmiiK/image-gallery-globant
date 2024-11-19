@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.get("/query", async (req, res) => {
   const query = req.query.query;
-  const apiUrl = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=12&client_id=${UNSPLASH_API_KEY}`;
+  const apiUrl = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=4&client_id=${UNSPLASH_API_KEY}`;
   try {
     const response = await fetch(apiUrl);
     if (!response.ok)
@@ -32,7 +32,7 @@ app.get("/random", async (req, res) => {
   const query = req.query.query;
   const apiUrl = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(
     query,
-  )}&count=12&client_id=${UNSPLASH_API_KEY}`;
+  )}&count=1&client_id=${UNSPLASH_API_KEY}`;
   try {
     const response = await fetch(apiUrl);
     if (!response.ok)
