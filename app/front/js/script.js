@@ -45,7 +45,6 @@ function addImages(imageUrls) {
     const imageElement = document.createElement("img");
     imageElement.src = url;
     imageElement.className = "image";
-    imageElement.loading = "lazy";
     imageElement.addEventListener("click", () => {
       saveImage(url);
     });
@@ -82,9 +81,8 @@ async function loadRandomImage() {
   }
 }
 
-function handleScroll() {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight - 100) loadRandomImage();
+function authenticate() {
+  console.log("HEY");
 }
 
 queryInput.addEventListener("keydown", (event) => {
@@ -95,10 +93,4 @@ toggleSavedButton.addEventListener("click", () => {
   savedImagesContainer.style.display = isVisible ? "none" : "block";
 });
 
-let isScrolling;
-window.addEventListener("scroll", () => {
-  clearTimeout(isScrolling);
-  isScrolling = setTimeout(handleScroll, 200);
-});
-
-for (let i = 0; i < 4; i++) loadRandomImage();
+loadRandomImage();

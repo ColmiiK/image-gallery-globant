@@ -32,7 +32,7 @@ app.get("/random", async (req, res) => {
   const query = req.query.query;
   const apiUrl = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(
     query,
-  )}&count=1&client_id=${UNSPLASH_API_KEY}`;
+  )}&count=4&client_id=${UNSPLASH_API_KEY}`;
   try {
     const response = await fetch(apiUrl);
     if (!response.ok)
