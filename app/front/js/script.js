@@ -118,6 +118,7 @@ function updateLoginButton() {
   }
 }
 
+//Not working
 async function logout() {
   try {
     await fetch("http://localhost:5000/logout", { method: "POST" });
