@@ -12,9 +12,11 @@ const savedImagesContainer = document.querySelector(".saved-images-container");
 const savedImagesList = document.querySelector(".saved-images");
 const toggleSavedButton = document.querySelector("#toggle-saved");
 const imageCountElement = document.querySelector(".image-count");
+const bookmarkIcon = document.querySelector(".bookmark-icon");
 const savedImages = [];
 let isLogged = false;
 const queryInput = document.querySelector("#query");
+const searchBox = document.querySelector(".search-box");
 
 function displaySavedImages() {
   savedImagesContainer.innerHTML = "";
@@ -46,7 +48,7 @@ function addImages(imageUrls) {
     imageElement.src = url;
     imageElement.className = "image";
     imageElement.addEventListener("click", () => {
-      saveImage(url);
+      if (isLogged) saveImage(url);
     });
     imageContainer.appendChild(imageElement);
   });
@@ -96,9 +98,13 @@ async function checkLoginStatus() {
     const data = await response.json();
     if (data.isLogged) {
       isLogged = true;
+      const savedHeader = document.querySelector(".saved-header");
+      savedHeader.style.display = "flex";
       updateLoginButton();
     } else {
       isLogged = false;
+      const savedHeader = document.querySelector(".saved-header");
+      savedHeader.style.display = "none";
       updateLoginButton();
     }
   } catch (error) {
@@ -115,7 +121,6 @@ function updateLoginButton() {
   }
 }
 
-//Not working
 async function logout() {
   console.log("isLogged:", isLogged);
   try {
@@ -133,6 +138,9 @@ queryInput.addEventListener("keydown", (event) => {
 toggleSavedButton.addEventListener("click", () => {
   const isVisible = savedImagesContainer.style.display === "block";
   savedImagesContainer.style.display = isVisible ? "none" : "block";
+  imageContainer.style.display = isVisible ? "flex" : "none";
+  searchBox.style.display = isVisible ? "block" : "none";
+  bookmarkIcon.src = isVisible ? "bookmark-closed.svg" : "bookmark-opened.svg";
 });
 
 loadRandomImage();

@@ -108,7 +108,7 @@ html {
   }
 }
 
-.image-container {
+.saved-images-container {
   overflow: hidden;
   margin: 20px;
   display: flex;
@@ -116,7 +116,7 @@ html {
   justify-content: center;
   align-items: center;
 }
-.saved-images-container {
+.image-container {
   overflow: hidden;
   margin: 20px;
   display: flex;
