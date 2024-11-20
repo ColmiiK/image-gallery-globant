@@ -96,6 +96,7 @@ app.get("/auth/confirmation", async (req, res) => {
 
 app.post("/logout", (req, res) => {
   accessToken = null;
+  console.log("User logged out");
   res.json({ message: "Logged out successfully" });
 });
 

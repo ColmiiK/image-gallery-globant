@@ -83,20 +83,17 @@ async function loadRandomImage() {
 
 async function authenticate() {
   if (isLogged) {
-    const loginButton = document.querySelector("#Login");
-    loginButton.innerHTML = "Logout";
     await logout();
+  } else {
+    window.location.href = "http://localhost:5000/auth";
   }
-  window.location.href = "http://localhost:5000/auth";
 }
 
 async function checkLoginStatus() {
   try {
     const response = await fetch(`http://localhost:5000/auth/confirmation`);
-
     if (!response.ok) throw new Error(`Error: ${response.statusText}`);
     const data = await response.json();
-
     if (data.isLogged) {
       isLogged = true;
       updateLoginButton();
@@ -120,6 +117,7 @@ function updateLoginButton() {
 
 //Not working
 async function logout() {
+  console.log("isLogged:", isLogged);
   try {
     await fetch("http://localhost:5000/logout", { method: "POST" });
     isLogged = false;
