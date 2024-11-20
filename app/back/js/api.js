@@ -89,6 +89,16 @@ app.get("/auth/callback", async (req, res) => {
   }
 });
 
+app.get("/auth/confirmation", async (req, res) => {
+  if (accessToken) res.json({ isLogged: true });
+  else res.json({ isLogged: false });
+});
+
+app.post("/logout", (req, res) => {
+  accessToken = null;
+  res.json({ message: "Logged out successfully" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

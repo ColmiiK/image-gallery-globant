@@ -13,7 +13,7 @@ const savedImagesList = document.querySelector(".saved-images");
 const toggleSavedButton = document.querySelector("#toggle-saved");
 const imageCountElement = document.querySelector(".image-count");
 const savedImages = [];
-
+let isLogged = false;
 const queryInput = document.querySelector("#query");
 
 function displaySavedImages() {
@@ -81,8 +81,51 @@ async function loadRandomImage() {
   }
 }
 
-function authenticate() {
+async function authenticate() {
+  if (isLogged) {
+    const loginButton = document.querySelector("#Login");
+    loginButton.innerHTML = "Logout";
+    await logout();
+  }
   window.location.href = "http://localhost:5000/auth";
+}
+
+async function checkLoginStatus() {
+  try {
+    const response = await fetch(`http://localhost:5000/auth/confirmation`);
+
+    if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+    const data = await response.json();
+
+    if (data.isLogged) {
+      isLogged = true;
+      updateLoginButton();
+    } else {
+      isLogged = false;
+      updateLoginButton();
+    }
+  } catch (error) {
+    console.log("Error checking authentification", error);
+  }
+}
+
+function updateLoginButton() {
+  const loginButton = document.querySelector("#Login");
+  if (isLogged) {
+    loginButton.innerHTML = "Logout";
+  } else {
+    loginButton.innerHTML = "Login";
+  }
+}
+
+async function logout() {
+  try {
+    await fetch("http://localhost:5000/logout", { method: "POST" });
+    isLogged = false;
+    updateLoginButton();
+  } catch (error) {
+    console.error("Error during logout:", error);
+  }
 }
 
 queryInput.addEventListener("keydown", (event) => {
@@ -94,3 +137,6 @@ toggleSavedButton.addEventListener("click", () => {
 });
 
 loadRandomImage();
+window.onload = () => {
+  checkLoginStatus();
+};
