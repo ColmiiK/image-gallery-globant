@@ -82,7 +82,7 @@ async function loadRandomImage() {
 }
 
 function authenticate() {
-  console.log("HEY");
+  window.location.href = "http://localhost:5000/auth";
 }
 
 queryInput.addEventListener("keydown", (event) => {
